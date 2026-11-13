@@ -17,10 +17,10 @@ public class BlackjackUI : MonoBehaviour
     [SerializeField] private Button hitButton;
     [SerializeField] private Button standButton;
 
-    [Header("Card UI")]
-    [SerializeField] private GameObject cardPrefab;
-    [SerializeField] private Transform playerCardContainer;
-    [SerializeField] private Transform cpuCardContainer;
+    [Header("Card Display")]
+    [SerializeField] private GameObject CardPrefab;
+    [SerializeField] private Transform PlayerCardContainer;
+    [SerializeField] private Transform CpuCardContainer;
 
     private void Start()
     {
@@ -97,7 +97,7 @@ public class BlackjackUI : MonoBehaviour
 
         for (int i = 0; i < hand.Cards.Count; i++)
         {
-            GameObject newCard = Instantiate(cardPrefab, container);
+            GameObject newCard = Instantiate(CardPrefab, container);
             CardUI cardUI = newCard.GetComponent<CardUI>();
             bool faceDown = hideSecondCard && i == 1;
             cardUI.SetCard(hand.Cards[i], faceDown);
@@ -106,10 +106,10 @@ public class BlackjackUI : MonoBehaviour
 
     private void DisplayHand()
     {
-        DisplayHand(gameManager.PlayerHand, playerCardContainer, false);
+        DisplayHand(gameManager.PlayerHand, PlayerCardContainer, false);
 
         bool hideCpuCard = gameManager.CurrentRoundState == BlackJackManager.RoundState.PlayerTurn;
 
-        DisplayHand(gameManager.CpuHand, cpuCardContainer, hideCpuCard);
+        DisplayHand(gameManager.CpuHand, CpuCardContainer, hideCpuCard);
     }
 }
